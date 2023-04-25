@@ -3,6 +3,7 @@ package com.example.glovoapplication.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -23,14 +25,4 @@ public class Order {
     @OneToMany
     private List<Product> products;
 
-    public Order(Long id, Date date, Double cost) {
-        this.id = id;
-        this.date = date;
-        this.cost = cost;
-    }
-
-
-    public void addProduct(Product product) {
-        products.add(product);
-    }
 }

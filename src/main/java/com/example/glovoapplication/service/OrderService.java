@@ -18,22 +18,22 @@ public class OrderService {
     }
 
     public Order getOrderById(Long id) {
-        return orderRepository.getOrderById(id);
+        return orderRepository.findById(id).orElse(null);
     }
 
     public List<Order> getAllOrders() {
-        return orderRepository.getAllOrders();
+        return (List<Order>) orderRepository.findAll();
     }
 
     public void createOrder(Order order) {
-        orderRepository.createOrder(order);
+        orderRepository.save(order);
     }
 
     public void updateOrder(Long id, Order order) {
-        orderRepository.updateOrder(id, order);
+        orderRepository.save(order);
     }
 
     public void deleteOrder(Long id) {
-        orderRepository.deleteOrder(id);
+        orderRepository.deleteById(id);
     }
 }

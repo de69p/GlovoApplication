@@ -18,22 +18,22 @@ public class ProductService {
     }
 
     public Product getProductById(Long id) {
-        return productRepository.getProductById(id);
+        return productRepository.findById(id).orElse(null);
     }
 
     public List<Product> getAllProducts() {
-        return productRepository.getAllProducts();
+        return (List<Product>) productRepository.findAll();
     }
 
     public void createProduct(Product product) {
-        productRepository.createProduct(product);
+        productRepository.save(product);
     }
 
     public void updateProduct(Long id, Product product) {
-        productRepository.updateProduct(id,product);
+        productRepository.save(product);
     }
 
     public void deleteProduct(Long id) {
-        productRepository.deleteProduct(id);
+        productRepository.deleteById(id);
     }
 }
