@@ -1,5 +1,6 @@
 package com.example.glovoapplication.service;
 
+import com.example.glovoapplication.exception.OrderNotFoundException;
 import com.example.glovoapplication.model.Order;
 import com.example.glovoapplication.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,12 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public void updateOrder(Long id, Order order) {
-        orderRepository.save(order);
+    public void updateOrder(Long id, Order updatedOrder) {
+        Order existingOrder = orderRepository.findById(id)
+                        .orElseThrow(() -> new OrderNotFoundException("Order not found with id " + id));
+        existingOrder.setDate(updatedOrder.getDate());
+        existingOrder.setCost(updatedOrder.getCost());
+        orderRepository.save(existingOrder);
     }
 
     public void deleteOrder(Long id) {

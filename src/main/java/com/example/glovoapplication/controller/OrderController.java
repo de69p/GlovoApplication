@@ -2,7 +2,6 @@ package com.example.glovoapplication.controller;
 
 import com.example.glovoapplication.model.Order;
 import com.example.glovoapplication.service.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,5 +1,6 @@
 package com.example.glovoapplication.service;
 
+import com.example.glovoapplication.exception.ProductNotFoundException;
 import com.example.glovoapplication.model.Product;
 import com.example.glovoapplication.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,12 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public void updateProduct(Long id, Product product) {
-        productRepository.save(product);
+    public void updateProduct(Long id, Product updatedProduct) {
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product not found with id " + id));
+        existingProduct.setName(updatedProduct.getName());
+        existingProduct.setCost(updatedProduct.getCost());
+        productRepository.save(existingProduct);
     }
 
     public void deleteProduct(Long id) {

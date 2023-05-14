@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -20,7 +20,19 @@ public class Order {
 
     @Id
     private Long id;
-    private Date date;
+
+    public Order(Long id, LocalDate date, Double cost) {
+        this.id = id;
+        this.date = date;
+        this.cost = cost;
+    }
+
+    public Order(Long id, Double cost) {
+        this.id = id;
+        this.cost = cost;
+    }
+
+    private LocalDate date;
     private Double cost;
     @OneToMany
     private List<Product> products;
